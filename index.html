@@ -225,18 +225,18 @@
                                     <iframe width="560" height="315" src="https://www.youtube.com/embed/G3tKfnmNyQs" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
                                     <br><br>
                                     <h4 align="left">3. Analog Read</h4>
-                                    <p align="left">The Apollo3 has some internal ADC channels that allow us to measure:</p><br>
-                                    <p align="left"> - differential pairs</p><br>
-                                    <p align="left"> - the internal die temperature</p><br>
-                                    <p align="left"> - the internal VCC voltage</p><br>
-                                    <p align="left"> - the internal VSS voltage</p><br><br>
+                                    <p align="left">The Apollo3 has some internal ADC channels that allow us to measure:</p>
+                                    <p align="left"> - differential pairs</p>
+                                    <p align="left"> - the internal die temperature</p>
+                                    <p align="left"> - the internal VCC voltage</p>
+                                    <p align="left"> - the internal VSS voltage</p><br>
                                     <p align="left">In this example we could see the usage of analogRead by fading the built-in LED to match the voltage read in on one of the analog pins. Additionally some of the internal ADC connections are used to measure the die temperature and VCC levels.</p>
                                     <p align="left">In the video below, I heated up the chip by putting it in contact with a hot water plastic bag, and we can see data in the "temp (counts)" column (represents raw ADC counts from die temperature sensor) gradually increased. </p>
                                     <iframe width="560" height="315" src="https://www.youtube.com/embed/nYJqPeb7BAg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
                                     <br><br>
                                     <h4 align="left">4. Microphone Output</h4>
                                     <p align="left">In this example we tested the serial communication between the board and the computer. The Apollo3 contains two UART peripherals that can be used with the Arduino Serial api. One thing to note is that we need to match the baud rate we set in code with the baud rate appears on the bottom right of the serial monitor. Otheriwse, the output will not be what you would expected.</p>
-                                    
+
 
                                     <button class="btn btn-primary" data-bs-dismiss="modal">
                                         <i class="fas fa-xmark fa-fw"></i>
