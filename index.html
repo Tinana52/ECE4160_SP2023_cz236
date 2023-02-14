@@ -275,6 +275,7 @@
                                     <h4 align="left">Setup:</h4>
                                     <p align="left">Before starting to work on any lab tasks, I first installed Python 3 and pip as well as created a virtual environment for my lab2 folder. Then, to activate the virtual environment, I “cd” to the folder and used the command:  </p>
                                     <code>source FastRobots_ble/bin/activate</code>
+                                    <br>
                                     <p align="left">Now my CLI prompt should have the prefix (FastRobots_ble). </p>
                                     <p align="left">For the python code, We will be using Jupyter notebooks, which can be opened by this command:  </p>
                                     <code>jupyter lab </code>
@@ -288,6 +289,7 @@
                                     <img src="assets/img/lab2/lab2setup1.png" class="img-thumbnail" alt="...">
                                     <p align="left">Then I changed the default BLEService UUID with the newly generated UUID in both ble_arduino.ino and connection.yaml to avoid connecting to my classmates’ Artemis boards.  </p>
                                     <img src="assets/img/lab2/lab2setup2.png" class="img-thumbnail" alt="...">
+                                    <br><br>
                                     <br><br>
                                     <h3 align="left">Lab Tasks </h3>
                                     <h4 align="left">Task1: Send Echo Command </h4>
@@ -310,6 +312,7 @@
                                     <h4 align="left">Task3: Notification Handler </h4>
                                     <p align="left">In Jupyter Notebook, ble.start_notify(ble.uuid['RX_STRING'], callback_function) will automatically fill the two inputs (uuid and byte_array) of the callback_function. So in callback_function we only need to convert the raw value of byte_array to string in order for printing. After calling ble.send_command(), the notification handler will keep running to receive any corresponding data from bluetooth. The difference between this task and task 2 is that we no longer need to call ble.receive_string() to manually receive data; instead, the notification handler will do this for us.  </p>
                                     <img src="assets/img/lab2/task3.png" class="img-thumbnail" alt="...">
+                                    <br><br>
                                     <iframe width="560" height="315" src="https://www.youtube.com/embed/l_41p-dOTu0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
                                     <br><br>
                                     <h4 align="left">Task4: Get Temperature Command </h4>
@@ -317,6 +320,7 @@
                                     <img src="assets/img/lab2/5s.png" class="img-thumbnail" alt="...">
                                     <p align="left">In Jupyter Notebook, I wrote a callback_function to collect and rearrange the data into two arrays, time_array and temp_array, respectively.  </p>
                                     <img src="assets/img/lab2/send5s.png" class="img-thumbnail" alt="...">
+                                    <br><br>
                                     <iframe width="560" height="315" src="https://www.youtube.com/embed/WDM3lpW1FQ8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
                                     <br><br>
                                     <h4 align="left">Task5: Get Temperature_Rapid Command </h4>
@@ -324,10 +328,11 @@
                                     <img src="assets/img/lab2/rapid.png" class="img-thumbnail" alt="...">
                                     <p align="left">In Jupyter Notebook, I wrote a callback_function to collect and rearrange the data for printing. </p>
                                     <img src="assets/img/lab2/sendrapid.png" class="img-thumbnail" alt="...">
-                                    <iframe width="560" height="315" src="https://www.youtube.com/embed/XhztCjum7FQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                                    <br><br>
+                                    <iframe width="560" height="315" src="https://www.youtube.com/embed/T4BjHp1s8Y8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
                                     <br><br>
                                     <h4 align="left">Task6: Limitations </h4>
-                                    <p align="left">To address the problem with memory limitation and latency, the robot needs to handle all real-time processing on-board, and communicate results in chunks with computer.</p> 
+                                    <p align="left">To address the problem with memory limitation and latency, the robot needs to handle all real-time processing on-board, and communicate results in chunks with computer.</p>
                                     <p align="left">The Artemis board has 384 kB of RAM, which is 384000 Bytes of memory. If all of these memory are available for use, and we are sending 5 seconds of 16-bit(= 2 Bytes) data taken at 150 Hz,  then we can store 384000/(5*2*150) = 256 groups of such data before running out of memory.   </p>
 
 
