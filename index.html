@@ -328,7 +328,7 @@
                                     <img src="assets/img/lab3/ranging.png" class="img-thumbnail" alt="...">
                                     <br><br>
                                     <h4 align="left">Task4: Two ToF sensors</h4>
-                                    <p align="left">As mentioned earlier, to use two ToF sensors simultaneously, I plan to resolve the sensor address conflict by changing the address of one sensor programmatically while powered. To be specific, I first shutdown sensor 2 to change I2C address of sensor 1 to 0x50, and then turn sensor 2 back on. </p>
+                                    <p align="left">As mentioned earlier, to use two ToF sensors simultaneously, I plan to resolve the sensor address conflict by changing the address of one sensor programmatically while powered. To be specific, I first shutdown sensor 2 to change I2C address of sensor 1 to 0x50, and then turn sensor 2 back on. <br><br>
                                     <code align="left">pinMode(2, OUTPUT); <br>
                                         digitalWrite(2, HIGH); <br>
 
@@ -337,12 +337,12 @@
 
                                         distanceSensor1.setI2CAddress(0x50); <br>
                                         digitalWrite(3, HIGH); <br>
-                                    </code>
+                                    </code></p>
                                     <p align="left">Below is the video showing two sensors work concurrently. </p>
                                     <iframe width="560" height="315" src="https://www.youtube.com/embed/g1MuljhBgWU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
                                     <br><br>
                                     <h4 align="left">Task5: ToF sensor speed</h4>
-                                    <p align="left">To see the delays of collecting sensor data, I slightly modified the code in task 7 by adding the while loop below: </p>
+                                    <p align="left">To see the delays of collecting sensor data, I slightly modified the code in task 7 by adding the while loop below: <br><br>
                                     <code align="left"> while (!distanceSensor1.checkForDataReady() || !distanceSensor2.checkForDataReady()) <br>
                                         { <br>
                                             int time = millis(); <br>
@@ -350,7 +350,7 @@
                                             Serial.print(time); <br>
                                             Serial.println(); <br>
                                         } <br>
-                                    </code>
+                                    </code></p>
                                     <p align="left">From the printed output, we could observe that the delays between two sets of sensor data is approximately 100ms. The the limiting time factor is the time it takes for the ToF sensors to gather and process data rather than the Artemis board’s internal clock cycle. </p>
                                     <img src="assets/img/lab3/speed.png" class="img-thumbnail" alt="...">
                                     <br><br>
