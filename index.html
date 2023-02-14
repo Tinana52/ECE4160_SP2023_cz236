@@ -290,7 +290,7 @@
                             <div class="row justify-content-center">
                                 <div class="col-lg-8">
                                     <!-- Portfolio Modal - Title-->
-                                    <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0">Lab3</h2>
+                                    <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0">Lab 3: Time of Flight Sensors</h2>
                                     <!-- Icon Divider-->
                                     <div class="divider-custom">
                                         <div class="divider-custom-line"></div>
@@ -298,7 +298,66 @@
                                         <div class="divider-custom-line"></div>
                                     </div>
                                     <!-- Portfolio Modal - Text-->
-                                    <p class="mb-4">To be continued...</p>
+                                    <h3 align="left">Objective</h3>
+                                    <p align="left">The purpose of this lab is to equip the robot with sensors by connecting the Artemis board to two VL53L1X Time-of-Flight Distance Sensors. We would do soldering stuff, run example codes, test sensor’s accuracy, and write code for two sensors working simultaneously.  </p>
+                                    <h3 align="left">Prelab</h3>
+                                    <p align="left">The default I2C address of the ToF sensors, as included in its datasheet, is 0x52.  </p>
+                                    <img src="assets/img/lab1/I2C.png" class="img-thumbnail" alt="...">
+                                    <p align="left">To use two ToF sensors concurrently, we have to solve the address conflict by either changing the address programmatically (while powered) or enabling the two sensors separately through their shutdown pins. I decided to use the former approach since it allows us to communicate with both ToF sensors simultaneously without having to shut down either one of the sensors, which could reduce delays for collecting sensor data. </p>
+                                    <p align="left">To detect distance in multiple views, I decided to place one ToF sensor at the front of my robot and the other one on the right of robot. However, in cases where an obstacle appears to the left or to the back, we would not be able to detect it. </p>
+                                    <h3 align="left">Lab tasks</h3>
+                                    <h4 align="left">Task1: Connecting Hardware</h4>
+                                    <p align="left">By convention, the red wire was soldered to Vin, the black wire was soldered to GND, the blue wire was soldered to SDA, and the yellow wire was soldered to SCL. I also soldered XSHUT pin of sensor1 to the output pin GPIO_02 and XSHUT pin of sensor2 to the output pin GPIO_03 for later use. </p>
+                                    <p align="left">Below is the picture of ToF sensors connected to the QWIIC breakout board and the Artemis board:</p>
+                                    <img src="assets/img/lab1/setup.png" class="img-thumbnail" alt="...">
+                                    <img src="assets/img/lab1/wire.png" class="img-thumbnail" alt="...">
+                                    <br><br>
+                                    <h4 align="left">Task2: Artemis scanning for I2C device</h4>
+                                    <p align="left">To get familiar with the I2C library, we run the example code in File->Examples->Apollo3->Wire and open Example1_wire_I2C. We found that the output address was 0x29.  </p>
+                                    <img src="assets/img/lab1/port.png" class="img-thumbnail" alt="...">
+                                    <p align="left">However, the default address shown on data sheet is 0x52. This is because the address is a bit shifted and the LSB is for the read/write status. In other words, since 0x52 = 0x29 << 1, so the addresses match. </p>
+                                    <br><br>
+                                    <h4 align="left">Task3: Sensor data & chosen mode</h4>
+                                    <p align="left">The ToF sensor has three modes: </p>
+                                    <img src="assets/img/lab1/modes.png" class="img-thumbnail" alt="...">
+                                    <p align="left">The long distance mode allows the longest possible ranging distance of 360cm to be reached. However, this distance can be impacted by ambient light. The short distance more is more immune to ambient light, but its max distance is only 136cm. For my robot, I plan to use the short distance mode with the command: </p>
+                                    <code>.setDistanceModeShort(); //1.3m </code>
+                                    <p align="left">To test my chosen mode, I used example code in “..\Arduino\libraries\SparkFun_VL53L1X_4m_Laser_Distance_Sensor\examples\Example1_ReadDistance” and plotted the actual distance vs. measured distance graph below using the average of repeatedly collected data. </p>
+                                    <img src="assets/img/lab1/distance.png" class="img-thumbnail" alt="...">
+                                    <p align="left">We can see the ToF sensor is pretty accurate within its mode distance range when the lighting condition is good. I also printed time (in milliseconds) it takes for the sensor to get data with or without stopRanging. </p>
+                                    <img src="assets/img/lab1/ranging.png" class="img-thumbnail" alt="...">
+                                    <br><br>
+                                    <h4 align="left">Task4: Two ToF sensors</h4>
+                                    <p align="left">As mentioned earlier, to use two ToF sensors simultaneously, I plan to resolve the sensor address conflict by changing the address of one sensor programmatically while powered. To be specific, I first shutdown sensor 2 to change I2C address of sensor 1 to 0x50, and then turn sensor 2 back on. </p>
+                                    <code>pinMode(2, OUTPUT); <br>
+                                        digitalWrite(2, HIGH); <br>
+
+                                        pinMode(3, OUTPUT); <br>
+                                        digitalWrite(3, LOW); <br>
+
+                                        distanceSensor1.setI2CAddress(0x50); <br>
+                                        digitalWrite(3, HIGH); <br>
+                                    </code>
+                                    <p align="left">Below is the video showing two sensors work concurrently. </p>
+                                    <iframe width="560" height="315" src="https://www.youtube.com/embed/g1MuljhBgWU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                                    <br><br>
+                                    <h4 align="left">Task5: ToF sensor speed</h4>
+                                    <p align="left">To see the delays of collecting sensor data, I slightly modified the code in task 7 by adding the while loop below: </p>
+                                    <code> while (!distanceSensor1.checkForDataReady() || !distanceSensor2.checkForDataReady()) <br>
+                                        { <br>
+                                            int time = millis(); <br>
+                                            Serial.print("Time: "); <br>
+                                            Serial.print(time); <br>
+                                            Serial.println(); <br>
+                                        } <br>
+                                    </code>
+                                    <p align="left">From the printed output, we could observe that the delays between two sets of sensor data is approximately 100ms. The the limiting time factor is the time it takes for the ToF sensors to gather and process data rather than the Artemis board’s internal clock cycle. </p>
+                                    <img src="assets/img/lab1/speed.png" class="img-thumbnail" alt="...">
+                                    <br><br>
+                                    <h4 align="left">Task6: Data sent over bluetooth</h4>
+                                    <p align="left">To record time-stamped ToF data for a set period of time and then send it over Bluetooth to pc, I added GET_ToF_5s_RAPID case in my lab2 Arduino code and wrote a corresponding callback function in Jupyter Notebook. The below graph shows distance data gathered over approximately 5 seconds from both sensors. </p>
+                                    <iframe width="560" height="315" src="https://www.youtube.com/embed/RNgupbF-Mlc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                                    <img src="assets/img/lab1/plot.png" class="img-thumbnail" alt="...">
                                     <button class="btn btn-primary" data-bs-dismiss="modal">
                                         <i class="fas fa-xmark fa-fw"></i>
                                         Close Window
