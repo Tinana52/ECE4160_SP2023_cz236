@@ -117,7 +117,7 @@
                             <div class="portfolio-item-caption-content text-center text-white"><i
                                     class="fas fa-plus fa-3x"></i></div>
                         </div>
-                        <img class="img-fluid" src="assets/img/portfolio/tobecontinued.png" alt="Lab4" />
+                        <img class="img-fluid" src="assets/img/portfolio/Lab4.png" alt="Lab4" />
                     </div>
                 </div>
                 <!-- Portfolio Item 5-->
@@ -634,7 +634,7 @@
                                 <h4 align="left">Task1: Setup the IMU</h4>
                                 <p align="left">First, we connected the IMU to the Artemis board using the QWIIC cable,
                                     as shown below. </p>
-                                <img src="assets/img/lab2/IMUsetup.png" class="img-thumbnail" alt="...">
+                                <img src="assets/img/lab4/IMUsetup.png" class="img-thumbnail" alt="...">
                                 <p align="left">We then could run the IMU example code to get data from the
                                     accelerometer and the gyroscope, as shown in the video below. </p>
                                 <iframe width="560" height="315" src="https://www.youtube.com/embed/AIuVwJDMUw4"
@@ -646,12 +646,13 @@
                                     directions. </p>
                                 <br><br>
                                 <p align="left">Note that in the example code, the AD0_VAL PIN is defined to be 1 by
-                                    default. It should be the value of the last bit of the I2C address. </p>
+                                    default. It is defined as the value of the last bit of the I2C address. </p>
                                 <code>#define AD0_VAL 1 </code>
+                                <br>
                                 <img src="assets/img/lab4/I2C.png" class="img-thumbnail" alt="...">
                                 <p align="left">According to the screenshot above, running the Wire_I2C code gave us the
                                     I2C address of 0x69, the LSB is 1, so the AD0_VAL should be set to 1. </p>
-                                <br><br>
+                                <br>
                                 <p align="left">I also added a function to blink the LED three times slowly on start-up
                                     as a visual indication that the board is running, as shown below. </p>
                                 <img src="assets/img/lab4/blink.png" class="img-thumbnail" alt="...">
@@ -704,13 +705,16 @@
                                             but have the issue of drifting, meaning that small errors could accumulate
                                             over time. As a result, after a significant amount of time, the readings
                                             would no longer be accurate as they drifted away from the actual values </p>
-                                        <br><br>
+                                        <br>
                                         <p align="left">I also adjusted my delay time from 100 ms to 10 ms to see the
                                             effect of increasing sampling frequency. It appears that increasing the
                                             sampling frequency (decrease delay time) improves the accuracy of my
                                             estimated angles and slightly reduces the drift effect. </p>
+                                        <p align="left">Gyro_100ms: </p>
                                         <img src="assets/img/lab4/Gyro_100ms.png" class="img-thumbnail" alt="...">
+                                        <p align="left">Gyro_10ms: </p>
                                         <img src="assets/img/lab4/Gyro_10ms.png" class="img-thumbnail" alt="...">
+                                        <br>
                                         <p align="left">To get both the low noise feature from gyroscope and no drift
                                             feature from accelerometer data, I implemented a complimentary filter using
                                             the equation below: </p>
@@ -765,8 +769,11 @@
                                             the components(the Artemis with battery and sensors) to the car and tried to
                                             record a stunt. </p>
                                         <img src="assets/img/lab4/car.png" class="img-thumbnail" alt="...">
+                                        <br><br>
                                         <p align="left">Below are two videos and their graphs platted using collected
-                                            data. </p>
+                                            data. For video 1, its ToFs got zeros after the first 2.5 seconds, probably
+                                            because of some hardware issues. After restarting the Artemis, everything
+                                            performed well and I got video 2.</p>
                                         <iframe width="560" height="315" src="https://www.youtube.com/embed/ZfEm_PGa_YM"
                                             title="YouTube video player" frameborder="0"
                                             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
