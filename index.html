@@ -812,7 +812,8 @@
                         <div class="row justify-content-center">
                             <div class="col-lg-8">
                                 <!-- Portfolio Modal - Title-->
-                                <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0">Lab5</h2>
+                                <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0">Lab5: Motors and
+                                    Open Loop Control</h2>
                                 <!-- Icon Divider-->
                                 <div class="divider-custom">
                                     <div class="divider-custom-line"></div>
@@ -820,7 +821,86 @@
                                     <div class="divider-custom-line"></div>
                                 </div>
                                 <!-- Portfolio Modal - Text-->
-                                <p class="mb-4">To be continued...</p>
+                                <h3 align="left">Objective</h3>
+                                <p align="left">In this lab, we changed from manual to open loop control of the car. At
+                                    the end of this lab, our car executed a pre-programmed series of moves, using the
+                                    Artemis board and two dual motor drivers. </p>
+                                <h3 align="left">Prelab</h3>
+                                <h4 align="left">Below is the connection I used for my car: </h4>
+                                <img src="assets/img/lab5/pin.png" class="img-thumbnail" alt="...">
+                                <p align="left">I powered the Artemis and the motor drivers/motors from separate
+                                    batteries in order to reduce noises that will affect the Artemis microcontroller and
+                                    to give more power to our motors that draw a lot more current than the Artemis
+                                    board. </p>
+                                <br><br>
+                                <h3 align="left">Lab tasks</h3>
+                                <h4 align="left">Task1: Setup one motor driver</h4>
+                                <p align="left">Below is a picture of my setup with power supply and oscilloscope
+                                    hookup: </p>
+                                <img src="assets/img/lab5/setup.png" class="img-thumbnail" alt="...">
+                                <p align="left">I chose a 3.7V power supply in order to mimic the voltage of the
+                                    batteries that we use. </p>
+                                <p align="left">Then, I used the code snippet below to test the motor drivers: </p>
+                                <img src="assets/img/lab5/code.png" class="img-thumbnail" alt="...">
+                                <p align="left">I first set pin 4 to 0 and pin A5 to 100 and got the oscilloscope output
+                                    as shown below: </p>
+                                <img src="assets/img/lab5/100.png" class="img-thumbnail" alt="...">
+                                <p align="left">Changing pin A5 to 200 gives this output: </p>
+                                <img src="assets/img/lab5/200.png" class="img-thumbnail" alt="...">
+                                <p align="left">The results were as expected. </p>
+                                <p align="left">I then took my car apart and replaced the oscilloscope connections with
+                                    connections to the motor. I used the code below instead to show that the motors can
+                                    run in both directions. </p>
+                                <img src="assets/img/lab5/code2.png" class="img-thumbnail" alt="...">
+                                <iframe width="560" height="315" src="https://www.youtube.com/embed/yD9zzBJxJ7E"
+                                    title="YouTube video player" frameborder="0"
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                    allowfullscreen></iframe>
+
+                                <br><br>
+                                <h4 align="left">Task2: Setup both motor drivers</h4>
+                                <p align="left">Next, I soldered the second motor driver with steps similar to the first
+                                    one and power the motor driver from the 850mAh battery. Below is the video testing
+                                    both wheels spinning. </p>
+                                <iframe width="389" height="692" src="https://www.youtube.com/embed/_Z0sOMwfFBo"
+                                    title="Lab5 part6" frameborder="0"
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                    allowfullscreen></iframe>
+                                <p align="left">Now I know that both motors work, I could secure everything in the car
+                                    and run it on its own. Below is a picture of all the components secured in the car:
+                                </p>
+                                <img src="assets/img/lab5/car.png" class="img-thumbnail" alt="...">
+
+                                <br><br>
+                                <h4 align="left">Task3: Controlling the car</h4>
+                                <p align="left">I tested slower speeds of the car traveling on the floor. The lowest
+                                    speed that the car can go while still moving at the expected speed is when the PWM
+                                    value was 45. </p>
+                                <p align="left">To calibrate my car, I set its PWM value of both wheels to 55 and see if
+                                    it can travel in a straight line. Via many trails of tests, I found that it always
+                                    travels more to its left, so I added a calibration factor of 1.28 in my code to
+                                    adjust the car’s left wheels’ speed based on the right wheels’ speed. Now it can go
+                                    straightly forward! </p>
+                                <iframe width="389" height="692" src="https://www.youtube.com/embed/3xAfkk7lg-c"
+                                    title="Lab5 part9" frameborder="0"
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                    allowfullscreen></iframe>
+                                <p align="left">Below is the code and video of the car demonstrating open loop control:
+                                </p>
+                                <img src="assets/img/lab5/code3.png" class="img-thumbnail" alt="...">
+                                <iframe width="389" height="692" src="https://www.youtube.com/embed/BKRih6aZHCM"
+                                    title="Lab5 part10" frameborder="0"
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                    allowfullscreen></iframe>
+
+
+
+
+
+
+
+
+
                                 <button class="btn btn-primary" data-bs-dismiss="modal">
                                     <i class="fas fa-xmark fa-fw"></i>
                                     Close Window
